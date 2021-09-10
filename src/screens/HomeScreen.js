@@ -8,7 +8,7 @@ export const HomeScreen = () => {
   const history = useHistory()
 
   const { token, setToken } = useContext(GlobalContext)
-
+  console.log(token)
   const logOutSession = () => {
     logOutUserApi(token).then(res => {
       if (res.data.success) {
