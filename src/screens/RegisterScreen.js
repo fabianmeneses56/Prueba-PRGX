@@ -24,7 +24,6 @@ export const RegisterScreen = () => {
   }) => {
     registerUserApi(nameValue, emailValue, passwordValue, ageValue).then(
       res => {
-        console.log(res)
         if (res.ok) {
           return Swal.fire('success', 'registered user', 'success')
         } else {
