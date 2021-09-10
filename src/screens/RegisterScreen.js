@@ -6,6 +6,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { AppFormInput } from '../form/AppFormInput'
 import { AppSubmit } from '../form/AppSubmit'
 import { ValidationRegister } from '../form/validations/registerValidation'
+import registerUserApi from '../api/registerUserApi'
 
 const initialValues = {
   email: '',
@@ -15,10 +16,12 @@ const initialValues = {
 }
 
 export const RegisterScreen = () => {
-  const onSubmit = values => {
-    console.log(values)
+  const onSubmit = ({ email, password, name, age }) => {
+    // console.log(values)
+    console.log(email, password, name, age)
+    registerUserApi(name, email, password, age).then(res => console.log(res))
   }
-
+  console.log(process.env.DEV)
   return (
     <Formik
       initialValues={initialValues}
