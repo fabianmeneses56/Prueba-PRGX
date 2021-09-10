@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useFormikContext } from 'formik'
 import { TextField } from '@material-ui/core'
 
-export const AppFormInput = ({ label, name, ...otherProps }) => {
-  const { handleBlur, handleChange, errors, touched, values } =
+export const AppFormInput = ({
+  label,
+  name,
+  preloadedInfoFromBackend,
+  ...otherProps
+}) => {
+  const { handleBlur, handleChange, setFieldValue, errors, touched, values } =
     useFormikContext()
+
+  // If preloadedInfoFromBackend, setting initials values on formik
+  useEffect(() => {
+    if (preloadedInfoFromBackend) {
+      setFieldValue(name, preloadedInfoFromBackend)
+    }
+  }, [preloadedInfoFromBackend])
 
   const errorAux = errors[name]
   const visible = touched[name]

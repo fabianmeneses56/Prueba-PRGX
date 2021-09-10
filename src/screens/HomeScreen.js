@@ -25,6 +25,9 @@ export const HomeScreen = () => {
   const ViewProfile = () => {
     history.push('/home/profile')
   }
+  const ProfileSettings = () => {
+    history.push('/home/profileSettings')
+  }
   return (
     <div>
       <h1>hola mundo</h1>
@@ -45,6 +48,15 @@ export const HomeScreen = () => {
         onClick={ViewProfile}
       >
         Profile
+      </Button>
+      <Button
+        variant='contained'
+        size='small'
+        color='primary'
+        className='WithButton'
+        onClick={ProfileSettings}
+      >
+        Profile Settings
       </Button>
     </div>
   )

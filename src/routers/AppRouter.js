@@ -8,6 +8,7 @@ import {
 import { GlobalContext } from '../auth/GlobalContext'
 import { HomeScreen } from '../screens/HomeScreen'
 import { ProfileScreen } from '../screens/ProfileScreen'
+import { ProfileSettingsScreen } from '../screens/ProfileSettingsScreen'
 import { AuthRouter } from './AuthRouter'
 import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute'
@@ -31,6 +32,11 @@ export const AppRouter = () => {
             isAuthenticated={token}
           />
           <Route exact path='/home/profile' component={ProfileScreen} />
+          <Route
+            exact
+            path='/home/profileSettings'
+            component={ProfileSettingsScreen}
+          />
 
           <Redirect to='/auth/login' />
         </Switch>
