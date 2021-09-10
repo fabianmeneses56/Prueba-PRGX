@@ -1,12 +1,8 @@
-import './App.css';
-import { LoginScreen } from './screens/LoginScreen';
+import './App.css'
+import { LoginScreen } from './screens/LoginScreen'
 
 function App() {
-  return (
-    
-    <LoginScreen/>
-   
-  );
+  return <LoginScreen />
 }
 
-export default App;
+export default App

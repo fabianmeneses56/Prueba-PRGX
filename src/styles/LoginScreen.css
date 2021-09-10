@@ -1,38 +1,37 @@
 .Container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction:column;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.FooterContainer{
-    width: 100%;
-    height: 70px;
-    bottom: 0;
-    position: absolute;
-   border-top: 1px solid #858585;
-    display: flex;
-    align-items: center;
+.FooterContainer {
+  width: 100%;
+  height: 70px;
+  bottom: 0;
+  position: absolute;
+  border-top: 1px solid #858585;
+  display: flex;
+  align-items: center;
 }
-.textFooter{
-    font-size: 14px;
-    margin-left: 10px;
+.textFooter {
+  font-size: 14px;
+  margin-left: 10px;
 }
-.sectionContainer{
-    display: flex;
-    flex-direction: column;
-    width: 20%;
+.sectionContainer {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
 }
-.FieldMargin{
-    margin-top: 15px!important;
+.FieldMargin {
+  margin-top: 15px !important;
 }
-.ButtonsContainer{
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 30px;
+.ButtonsContainer {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 30px;
 }
-.WithButton{
-    width:70px
+.WithButton {
+  width: 70px;
 }
-
