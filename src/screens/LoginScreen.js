@@ -4,8 +4,6 @@ import  '../styles/LoginScreen.css'
 export const LoginScreen = () => {
 return (
     <div   className="Container">
-
-   
         <section className="sectionContainer">
         <TextField id="standard-basic" label="Email" />
         <TextField className="FieldMargin" id="standard-basic" label="Password" />
