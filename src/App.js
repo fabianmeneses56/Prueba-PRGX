@@ -1,9 +1,9 @@
 import './App.css'
 import { LoginScreen } from './screens/LoginScreen'
-import { RegisterScreen } from './screens/RegisterScreen'
+// import { RegisterScreen } from './screens/RegisterScreen'
 
 function App() {
-  return <RegisterScreen />
+  return <LoginScreen />
 }
 
 export default App

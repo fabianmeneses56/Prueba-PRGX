@@ -1,12 +1,12 @@
 import React from 'react'
-import { TextField, Button } from '@material-ui/core'
-import '../styles/LoginScreen.css'
-import { Link } from 'react-router-dom'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
+import Swal from 'sweetalert2'
+import { Formik, Form } from 'formik'
+
 import { AppFormInput } from '../form/AppFormInput'
 import { AppSubmit } from '../form/AppSubmit'
 import { ValidationRegister } from '../form/validations/registerValidation'
 import registerUserApi from '../api/registerUserApi'
+import '../styles/LoginScreen.css'
 
 const initialValues = {
   email: '',
@@ -22,8 +22,15 @@ export const RegisterScreen = () => {
     name: nameValue,
     age: ageValue
   }) => {
-    registerUserApi(nameValue, emailValue, passwordValue, ageValue).then(res =>
-      console.log(res)
+    registerUserApi(nameValue, emailValue, passwordValue, ageValue).then(
+      res => {
+        console.log(res)
+        if (res.ok) {
+          return Swal.fire('success', 'registered user', 'success')
+        } else {
+          return Swal.fire('Error', 'An error has occurred', 'error')
+        }
+      }
     )
   }
   console.log(process.env.DEV)

@@ -1,8 +1,7 @@
 import React from 'react'
-import { TextField, Button } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import '../styles/LoginScreen.css'
-import { Link } from 'react-router-dom'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
+import { Formik, Form } from 'formik'
 import { AppFormInput } from '../form/AppFormInput'
 import { AppSubmit } from '../form/AppSubmit'
 import { ValidationLogin } from '../form/validations/loginValidation'
@@ -29,12 +28,8 @@ export const LoginScreen = () => {
               <section className='sectionContainer'>
                 <AppFormInput label='Email' name='email' />
                 <AppFormInput label='password' name='password' />
-                {/* <TextField id="standard-basic" label="Email" /> */}
-                {/* <TextField className="FieldMargin" id="standard-basic" label="Password" /> */}
+
                 <article className='ButtonsContainer'>
-                  {/* <Button variant="contained" size="small" color="primary" className="WithButton" onClick={() => { alert('pulsado') }}>
-            Login
-            </Button> */}
                   <AppSubmit title='login' />
 
                   <Button

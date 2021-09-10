@@ -1,9 +1,9 @@
 import React from 'react'
 import { useFormikContext } from 'formik'
-import { TextField, Button } from '@material-ui/core'
+import { TextField } from '@material-ui/core'
 
 export const AppFormInput = ({ label, name, ...otherProps }) => {
-  const { handleBlur, handleChange, setFieldValue, errors, touched, values } =
+  const { handleBlur, handleChange, errors, touched, values } =
     useFormikContext()
 
   const errorAux = errors[name]
