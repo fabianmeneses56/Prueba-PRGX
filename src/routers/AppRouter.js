@@ -7,6 +7,8 @@ import {
 } from 'react-router-dom'
 import { GlobalContext } from '../auth/GlobalContext'
 import { HomeScreen } from '../screens/HomeScreen'
+import { Test1 } from '../screens/Test1'
+import { AllPublicRoutes } from './AllPublicRoutes'
 import { AuthRouter } from './AuthRouter'
 import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute'
@@ -29,6 +31,7 @@ export const AppRouter = () => {
             component={HomeScreen}
             isAuthenticated={token}
           />
+          <Route exact path='/home/profile' component={Test1} />
 
           <Redirect to='/auth/login' />
         </Switch>
