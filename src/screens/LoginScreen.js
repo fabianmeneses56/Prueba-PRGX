@@ -5,6 +5,7 @@ import '../styles/LoginScreen.css'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { AppFormInput } from '../form/AppFormInput'
 import { AppSubmit } from '../form/AppSubmit'
+import { ValidationLogin } from '../form/validations/loginValidation'
 
 const initialValues = {
   email: '',
@@ -16,7 +17,11 @@ export const LoginScreen = () => {
   }
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={ValidationLogin}
+    >
       {({ errors, touched, isSubmitting, setFieldValue }) => {
         return (
           <Form>
