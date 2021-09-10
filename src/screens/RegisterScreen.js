@@ -16,10 +16,15 @@ const initialValues = {
 }
 
 export const RegisterScreen = () => {
-  const onSubmit = ({ email, password, name, age }) => {
-    // console.log(values)
-    console.log(email, password, name, age)
-    registerUserApi(name, email, password, age).then(res => console.log(res))
+  const onSubmit = ({
+    email: emailValue,
+    password: passwordValue,
+    name: nameValue,
+    age: ageValue
+  }) => {
+    registerUserApi(nameValue, emailValue, passwordValue, ageValue).then(res =>
+      console.log(res)
+    )
   }
   console.log(process.env.DEV)
   return (
