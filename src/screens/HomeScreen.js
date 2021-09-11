@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, createContext } from 'react'
 import { Button } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { DataGrid } from '@material-ui/data-grid'
@@ -12,10 +12,14 @@ import { GlobalContext } from '../auth/GlobalContext'
 import { columns } from '../components/tableConfiguration'
 
 import '../styles/HomeScreenStyles.css'
+import deleteTaskApi from '../api/deleteTaskApi'
 
+export const CheckContext = createContext()
 export const HomeScreen = () => {
   const history = useHistory()
+
   const [dataTable, setDataTable] = useState([])
+  const [selectId, setSelectId] = useState(null)
 
   const { token, setToken } = useContext(GlobalContext)
 
@@ -45,6 +49,16 @@ export const HomeScreen = () => {
     })
   }
 
+  const handleDeleteClick = event => {
+    deleteTaskApi(token, selectId).then(res => {
+      if (res.data.success) {
+        return Swal.fire('success', 'task deleted successfully', 'success')
+      } else {
+        return Swal.fire('Error', 'An error has occurred', 'error')
+      }
+    })
+  }
+
   const storageLogOut = async () => {
     ;(await process.browser) && window.sessionStorage.removeItem('secret_key')
   }
@@ -60,63 +74,69 @@ export const HomeScreen = () => {
   }
   return (
     <div>
-      <div className='generalContainer'>
-        <h3 className='textFooter'>Home</h3>
-        <section className='containerButtons'>
-          <Button
-            variant='contained'
-            size='small'
-            color='primary'
-            onClick={ProfileSettings}
-          >
-            Profile Settings
-          </Button>
-          <Button
-            variant='contained'
-            size='small'
-            color='primary'
-            onClick={ViewProfile}
-          >
-            Profile
-          </Button>
-
-          <Button
-            variant='contained'
-            size='small'
-            color='secondary'
-            className='WithButton'
-            onClick={logOutSession}
-          >
-            LogOut
-          </Button>
-          <section className='secondaryButtonsHome'>
-            <article className='ButonMargin'>
-              <Button variant='contained' color='primary' onClick={NewTask}>
-                New Task
-                <AddIcon />
-              </Button>
-            </article>
-
-            <Button variant='contained' color='secondary'>
-              Remove Selected
-              <DeleteIcon />
+      <CheckContext.Provider value={{ selectId, setSelectId }}>
+        <div className='generalContainer'>
+          <h3 className='textFooter'>Home</h3>
+          <section className='containerButtons'>
+            <Button
+              variant='contained'
+              size='small'
+              color='primary'
+              onClick={ProfileSettings}
+            >
+              Profile Settings
             </Button>
+            <Button
+              variant='contained'
+              size='small'
+              color='primary'
+              onClick={ViewProfile}
+            >
+              Profile
+            </Button>
+
+            <Button
+              variant='contained'
+              size='small'
+              color='secondary'
+              className='WithButton'
+              onClick={logOutSession}
+            >
+              LogOut
+            </Button>
+            <section className='secondaryButtonsHome'>
+              <article className='ButonMargin'>
+                <Button variant='contained' color='primary' onClick={NewTask}>
+                  New Task
+                  <AddIcon />
+                </Button>
+              </article>
+
+              <Button
+                variant='contained'
+                color='secondary'
+                onClick={handleDeleteClick}
+              >
+                Remove Selected
+                <DeleteIcon />
+              </Button>
+            </section>
           </section>
-        </section>
-        <section className='tableContainer'>
-          <DataGrid
-            getRowId={row => row.id}
-            rows={filterData}
-            columns={columns}
-            pageSize={5}
-            checkboxSelection
-            disableSelectionOnClick
-          />
-        </section>
-        <footer className='FooterContainerHome'>
-          <h3 className='textFooter'>Footer</h3>
-        </footer>
-      </div>
+          <section className='tableContainer'>
+            <DataGrid
+              getRowId={row => row.id}
+              rows={filterData}
+              columns={columns}
+              pageSize={5}
+              checkboxSelection={false}
+              disableSelectionOnClick
+            />
+          </section>
+          <footer className='FooterContainerHome'>
+            <h3 className='textFooter'>Footer</h3>
+          </footer>
+        </div>
+      </CheckContext.Provider>
     </div>
   )
 }

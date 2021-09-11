@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import Swal from 'sweetalert2'
 import IconButton from '@material-ui/core/IconButton'
@@ -6,10 +6,13 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import { createTheme } from '@material-ui/core/styles'
 import { makeStyles } from '@material-ui/styles'
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
+import CheckBoxIcon from '@material-ui/icons/CheckBox'
 
 import updateTaskApi from '../api/updateTaskApi'
 import deleteTaskApi from '../api/deleteTaskApi'
 import { GlobalContext } from '../auth/GlobalContext'
+import { CheckContext } from '../screens/HomeScreen'
 
 const defaultTheme = createTheme()
 const useStyles = makeStyles(
@@ -28,6 +31,18 @@ const useStyles = makeStyles(
 )
 
 export const columns = [
+  {
+    field: 'check',
+    headerName: 'Check',
+    renderCell: RowCheckBox,
+    sortable: false,
+    width: 180,
+    headerAlign: 'center',
+    filterable: false,
+    align: 'center',
+    disableColumnMenu: true,
+    disableReorder: true
+  },
   {
     field: 'description',
     headerName: 'Description',
@@ -126,8 +141,37 @@ export function RowMenuCell(props) {
     </div>
   )
 }
+function RowCheckBox(props) {
+  const { id } = props
+  const classes = useStyles()
+  const { setSelectId } = useContext(CheckContext)
+  const [check, setcheck] = useState(false)
+
+  const handleEnd = event => {
+    setcheck(!check)
+    setSelectId(id)
+  }
+
+  return (
+    <div className={classes.root}>
+      <IconButton
+        color='inherit'
+        className={classes.textPrimary}
+        size='small'
+        aria-label='edit'
+        onClick={handleEnd}
+      >
+        {check ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
+      </IconButton>
+    </div>
+  )
+}
 
 RowMenuCell.propTypes = {
+  api: PropTypes.object.isRequired,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired
+}
+RowCheckBox.propTypes = {
   api: PropTypes.object.isRequired,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired
 }
