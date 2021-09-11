@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Formik, Form } from 'formik'
 import Swal from 'sweetalert2'
+
 import { AppFormInput } from '../form/AppFormInput'
 import { AppSubmit } from '../form/AppSubmit'
 import { addNewTaskValidation } from '../form/validations/addNewTaskValidation'
@@ -30,7 +31,7 @@ export const NewTaskScreen = () => {
       onSubmit={onSubmit}
       validationSchema={addNewTaskValidation}
     >
-      {({ errors, touched, isSubmitting, setFieldValue }) => {
+      {() => {
         return (
           <div className='generalContainer'>
             <div>

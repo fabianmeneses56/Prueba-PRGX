@@ -43,7 +43,7 @@ export const ProfileSettingsScreen = () => {
         onSubmit={onSubmit}
         validationSchema={updateProfileValidation}
       >
-        {({ errors, touched, isSubmitting, setFieldValue }) => {
+        {() => {
           return (
             <Form>
               <div className='Container'>

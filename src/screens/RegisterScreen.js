@@ -40,7 +40,7 @@ export const RegisterScreen = () => {
       onSubmit={onSubmit}
       validationSchema={ValidationRegister}
     >
-      {({ errors, touched, isSubmitting, setFieldValue }) => {
+      {() => {
         return (
           <Form>
             <div className='Container'>

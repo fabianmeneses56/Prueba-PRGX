@@ -10,9 +10,9 @@ import logOutUserApi from '../api/logOutUserApi'
 import getAllTaskApi from '../api/getAllTaskApi'
 import { GlobalContext } from '../auth/GlobalContext'
 import { columns } from '../components/tableConfiguration'
+import deleteTaskApi from '../api/deleteTaskApi'
 
 import '../styles/HomeScreenStyles.css'
-import deleteTaskApi from '../api/deleteTaskApi'
 
 export const CheckContext = createContext()
 export const HomeScreen = () => {
