@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { DataGrid } from '@material-ui/data-grid'
 import AddIcon from '@material-ui/icons/Add'
 import DeleteIcon from '@material-ui/icons/Delete'
+import Swal from 'sweetalert2'
 
 import logOutUserApi from '../api/logOutUserApi'
 import getAllTaskApi from '../api/getAllTaskApi'
@@ -37,6 +38,9 @@ export const HomeScreen = () => {
       if (res.data.success) {
         setToken(null)
         storageLogOut()
+        return Swal.fire('success', 'LogOut successfully', 'success')
+      } else {
+        return Swal.fire('Error', 'An error has occurred', 'error')
       }
     })
   }
