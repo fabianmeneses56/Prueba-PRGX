@@ -6,13 +6,12 @@ import '../styles/ProfileStyles.css'
 export const ProfileScreen = () => {
   const { token } = useContext(GlobalContext)
   const [dataProfile, setDataProfile] = useState([])
-  console.log(token)
 
   useEffect(() => {
     GetUserApi(token).then(res => setDataProfile(res.data))
-  }, [])
+  }, [token])
   const fisrtLetters = dataProfile.name ? dataProfile.name.slice(0, 2) : []
-  console.log(fisrtLetters)
+
   return (
     <div className='Contaier'>
       <section className='ContainerSectionWelcome'>

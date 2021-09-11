@@ -32,7 +32,7 @@ export const RegisterScreen = () => {
       }
     )
   }
-  console.log(process.env.DEV)
+
   return (
     <Formik
       initialValues={initialValues}
