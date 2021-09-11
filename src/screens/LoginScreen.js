@@ -1,15 +1,16 @@
 import React, { useContext } from 'react'
 import { Button } from '@material-ui/core'
-import { Link } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 import Swal from 'sweetalert2'
+import { useHistory } from 'react-router-dom'
 
-import '../styles/LoginScreen.css'
 import { AppFormInput } from '../form/AppFormInput'
 import { AppSubmit } from '../form/AppSubmit'
 import { ValidationLogin } from '../form/validations/loginValidation'
 import loginUserApi from '../api/loginUserApi'
 import { GlobalContext } from '../auth/GlobalContext'
+
+import '../styles/LoginScreen.css'
 
 const initialValues = {
   email: '',
@@ -17,7 +18,7 @@ const initialValues = {
 }
 export const LoginScreen = () => {
   const { setToken } = useContext(GlobalContext)
-
+  const history = useHistory()
   const onSubmit = ({ email: emailValue, password: passwordValue }) => {
     loginUserApi(emailValue, passwordValue).then(res => {
       if (res.ok) {
@@ -35,14 +36,16 @@ export const LoginScreen = () => {
       window.sessionStorage.setItem('secret_key', value)
     }
   }
-
+  const register = () => {
+    history.push('/auth/register')
+  }
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={ValidationLogin}
     >
-      {({ errors, touched, isSubmitting, setFieldValue }) => {
+      {() => {
         return (
           <Form>
             <div className='Container'>
@@ -52,16 +55,15 @@ export const LoginScreen = () => {
 
                 <article className='ButtonsContainer'>
                   <AppSubmit title='login' />
-                  <Link to='/auth/register' className='link'>
-                    <Button
-                      variant='contained'
-                      size='small'
-                      color='primary'
-                      className='WithButton'
-                    >
-                      Signup
-                    </Button>
-                  </Link>
+                  <Button
+                    variant='contained'
+                    size='small'
+                    color='primary'
+                    className='WithButton'
+                    onClick={register}
+                  >
+                    Signup
+                  </Button>
                 </article>
               </section>
               <footer className='FooterContainer'>

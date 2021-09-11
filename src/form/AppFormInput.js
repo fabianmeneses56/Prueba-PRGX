@@ -1,13 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
 import { useFormikContext } from 'formik'
 import { TextField } from '@material-ui/core'
 
-export const AppFormInput = ({
-  label,
-  name,
-  preloadedInfoFromBackend,
-  ...otherProps
-}) => {
+export const AppFormInput = ({ label, name, preloadedInfoFromBackend }) => {
   const { handleBlur, handleChange, setFieldValue, errors, touched, values } =
     useFormikContext()
 

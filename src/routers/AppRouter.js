@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import { GlobalContext } from '../auth/GlobalContext'
 import { HomeScreen } from '../screens/HomeScreen'
+import { NewTaskScreen } from '../screens/NewTaskScreen'
 import { ProfileScreen } from '../screens/ProfileScreen'
 import { ProfileSettingsScreen } from '../screens/ProfileSettingsScreen'
 import { AuthRouter } from './AuthRouter'
@@ -37,6 +38,7 @@ export const AppRouter = () => {
             path='/home/profileSettings'
             component={ProfileSettingsScreen}
           />
+          <Route exact path='/home/newTask' component={NewTaskScreen} />
 
           <Redirect to='/auth/login' />
         </Switch>
