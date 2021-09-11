@@ -1,20 +1,89 @@
 import React, { useContext, useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
+import Swal from 'sweetalert2'
 import { Button } from '@material-ui/core'
 import logOutUserApi from '../api/logOutUserApi'
 import { GlobalContext } from '../auth/GlobalContext'
 import { useHistory } from 'react-router-dom'
-import {
-  DataGrid,
-  GridColDef,
-  GridApi,
-  GridCellValue
-} from '@material-ui/data-grid'
+import { DataGrid } from '@material-ui/data-grid'
+import IconButton from '@material-ui/core/IconButton'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/DeleteOutlined'
+import { createTheme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/styles'
 
 import '../styles/HomeScreenStyles.css'
 import getAllTaskApi from '../api/getAllTaskApi'
+import deleteTaskApi from '../api/deleteTaskApi'
+
+const defaultTheme = createTheme()
+const useStyles = makeStyles(
+  theme => ({
+    root: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: theme.spacing(1),
+      color: theme.palette.text.secondary
+    },
+    textPrimary: {
+      color: theme.palette.text.primary
+    }
+  }),
+  { defaultTheme }
+)
+
+function RowMenuCell(props) {
+  const { api, id } = props
+  const { token } = useContext(GlobalContext)
+  const classes = useStyles()
+
+  const handleEditClick = event => {
+    event.stopPropagation()
+    api.updateRows([{ id, _action: 'update' }])
+  }
+
+  const handleDeleteClick = event => {
+    deleteTaskApi(token, id).then(res => {
+      if (res.data.success) {
+        return Swal.fire('success', 'task deleted successfully', 'success')
+      } else {
+        return Swal.fire('Error', 'An error has occurred', 'error')
+      }
+    })
+
+    event.stopPropagation()
+    api.updateRows([{ id, _action: 'delete' }])
+  }
+
+  return (
+    <div className={classes.root}>
+      <IconButton
+        color='inherit'
+        className={classes.textPrimary}
+        size='small'
+        aria-label='edit'
+        onClick={handleEditClick}
+      >
+        <EditIcon fontSize='small' />
+      </IconButton>
+      <IconButton
+        color='inherit'
+        size='small'
+        aria-label='delete'
+        onClick={handleDeleteClick}
+      >
+        <DeleteIcon fontSize='small' />
+      </IconButton>
+    </div>
+  )
+}
+
+RowMenuCell.propTypes = {
+  api: PropTypes.object.isRequired,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired
+}
 
 const columns = [
-  { field: '_id', headerName: 'ID', width: 250 },
   {
     field: 'description',
     headerName: 'Description',
@@ -40,32 +109,16 @@ const columns = [
     width: 200
   },
   {
-    field: '',
+    field: 'actions',
     headerName: 'Actions',
+    renderCell: RowMenuCell,
     sortable: false,
-    width: 220,
-    disableClickEventBubbling: true,
-    renderCell: params => {
-      const onClick = () => {
-        const api = params.api
-        const fields = api
-          .getAllColumns()
-          .map(c => c.field)
-          .filter(c => c !== '__check__' && !!c)
-        const thisRow = {}
-
-        fields.forEach(f => {
-          console.log('====================================')
-          console.log((f = params.getValue(f)))
-          console.log('====================================')
-          // thisRow[f] = params.getValue(f)
-        })
-
-        // return alert(JSON.stringify(thisRow, null, 4))
-      }
-
-      return <Button onClick={onClick}>Click</Button>
-    }
+    width: 180,
+    headerAlign: 'center',
+    filterable: false,
+    align: 'center',
+    disableColumnMenu: true,
+    disableReorder: true
   }
 ]
 
@@ -81,7 +134,7 @@ export const HomeScreen = () => {
 
   const filterData = dataTable.map(res => {
     return {
-      _id: res._id,
+      id: res._id,
       description: res.description,
       completed: res.completed,
       createdAt: res.createdAt,
@@ -142,7 +195,7 @@ export const HomeScreen = () => {
       </div>
       <div className='tableContainer'>
         <DataGrid
-          getRowId={row => row._id}
+          getRowId={row => row.id}
           rows={filterData}
           columns={columns}
           pageSize={5}
