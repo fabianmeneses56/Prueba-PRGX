@@ -10,7 +10,6 @@ export const AppSubmit = ({ title, isSubmitting }) => {
       variant='contained'
       size='small'
       color='primary'
-      className='WithButton'
       onClick={handleSubmit}
       type='submit'
     >

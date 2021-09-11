@@ -6,6 +6,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import { createTheme } from '@material-ui/core/styles'
 import { makeStyles } from '@material-ui/styles'
+
 import updateTaskApi from '../api/updateTaskApi'
 import deleteTaskApi from '../api/deleteTaskApi'
 import { GlobalContext } from '../auth/GlobalContext'
@@ -74,7 +75,7 @@ export const columns = [
 ]
 
 export function RowMenuCell(props) {
-  const { api, id } = props
+  const { api, id, completed } = props
   const { token } = useContext(GlobalContext)
   const classes = useStyles()
 

@@ -1,4 +1,35 @@
 .tableContainer {
-  width: 90%;
-  height: 450px;
+  width: 70%;
+  height: 380px;
+  display: flex;
+  align-self: center;
+}
+.generalContainer {
+  display: flex;
+  flex-direction: column;
+}
+.containerButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 40px;
+}
+.FooterContainerHome {
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  border-top: 1px solid #858585;
+  align-items: center;
+}
+.textFooter {
+  font-size: 14px;
+  margin-left: 10px;
+}
+.secondaryButtonsHome {
+  display: flex;
+  align-self: center;
+  margin-bottom: 10px;
+}
+.ButonMargin {
+  margin-right: 60px;
 }
