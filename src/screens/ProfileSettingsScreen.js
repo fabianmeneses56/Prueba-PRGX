@@ -32,38 +32,41 @@ export const ProfileSettingsScreen = () => {
     })
   }
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-      validationSchema={updateProfileValidation}
-    >
-      {({ errors, touched, isSubmitting, setFieldValue }) => {
-        return (
-          <Form>
-            <div className='Container'>
-              <section className='sectionContainer'>
-                <AppFormInput
-                  label='Name'
-                  name='name'
-                  preloadedInfoFromBackend={dataProfile.name}
-                />
-                <AppFormInput
-                  label='Age'
-                  name='age'
-                  preloadedInfoFromBackend={dataProfile.age}
-                />
+    <div className='generalContainer'>
+      <h3 className='textFooter'>Profile Settings</h3>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={updateProfileValidation}
+      >
+        {({ errors, touched, isSubmitting, setFieldValue }) => {
+          return (
+            <Form>
+              <div className='Container'>
+                <section className='sectionContainer'>
+                  <AppFormInput
+                    label='Name'
+                    name='name'
+                    preloadedInfoFromBackend={dataProfile.name}
+                  />
+                  <AppFormInput
+                    label='Age'
+                    name='age'
+                    preloadedInfoFromBackend={dataProfile.age}
+                  />
 
-                <article className='ButtonsContainer'>
-                  <AppSubmit title=' Edit Profile' />
-                </article>
-              </section>
-              <footer className='FooterContainer'>
-                <h3 className='textFooter'>Footer</h3>
-              </footer>
-            </div>
-          </Form>
-        )
-      }}
-    </Formik>
+                  <article className='ButtonsContainer'>
+                    <AppSubmit title=' Edit Profile' />
+                  </article>
+                </section>
+                <footer className='FooterContainer'>
+                  <h3 className='textFooter'>Footer</h3>
+                </footer>
+              </div>
+            </Form>
+          )
+        }}
+      </Formik>
+    </div>
   )
 }

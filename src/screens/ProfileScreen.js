@@ -13,21 +13,27 @@ export const ProfileScreen = () => {
   const fisrtLetters = dataProfile.name ? dataProfile.name.slice(0, 2) : []
 
   return (
-    <div className='Contaier'>
-      <section className='ContainerSectionWelcome'>
-        <h3>Hi {dataProfile.name}</h3>
-        <h3>we are very happy to have you back</h3>
-      </section>
-      <section className='ContainerInfo'>
-        <article className='AvatarContainer'>
-          <Avatar className='AvatarImage'>{fisrtLetters}</Avatar>
-        </article>
-        <article className='InsideContainer'>
-          <h3 className='TextInfo'>Name : {dataProfile.name}</h3>
-          <h3 className='TextInfo'>Email : {dataProfile.email}</h3>
-          <h3 className='TextInfo'>Age: {dataProfile.age}</h3>
-        </article>
-      </section>
+    <div className='generalContainer'>
+      <h3 className='textFooter'>New Task</h3>
+      <div className='Contaier'>
+        <section className='ContainerSectionWelcome'>
+          <h3>Hi {dataProfile.name}</h3>
+          <h3>we are very happy to have you back</h3>
+        </section>
+        <section className='ContainerInfo'>
+          <article className='AvatarContainer'>
+            <Avatar className='AvatarImage'>{fisrtLetters}</Avatar>
+          </article>
+          <article className='InsideContainer'>
+            <h3 className='TextInfo'>Name : {dataProfile.name}</h3>
+            <h3 className='TextInfo'>Email : {dataProfile.email}</h3>
+            <h3 className='TextInfo'>Age: {dataProfile.age}</h3>
+          </article>
+        </section>
+      </div>
+      <footer className='FooterContainer'>
+        <h3 className='textFooter'>Footer</h3>
+      </footer>
     </div>
   )
 }

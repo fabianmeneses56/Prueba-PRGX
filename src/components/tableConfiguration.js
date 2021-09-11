@@ -75,7 +75,7 @@ export const columns = [
 ]
 
 export function RowMenuCell(props) {
-  const { api, id, completed } = props
+  const { api, id } = props
   const { token } = useContext(GlobalContext)
   const classes = useStyles()
 

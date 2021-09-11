@@ -31,20 +31,23 @@ export const NewTaskScreen = () => {
     >
       {({ errors, touched, isSubmitting, setFieldValue }) => {
         return (
-          <Form>
-            <div className='Container'>
-              <section className='sectionContainer'>
-                <AppFormInput label='description' name='description' />
+          <div className='generalContainer'>
+            <h3 className='textFooter'>New Task</h3>
+            <Form>
+              <div className='Container'>
+                <section className='sectionContainer'>
+                  <AppFormInput label='description' name='description' />
 
-                <article className='ButtonsContainer'>
-                  <AppSubmit title='Add Task' />
-                </article>
-              </section>
-              <footer className='FooterContainer'>
-                <h3 className='textFooter'>Footer</h3>
-              </footer>
-            </div>
-          </Form>
+                  <article className='ButtonsContainer'>
+                    <AppSubmit title='Add Task' />
+                  </article>
+                </section>
+                <footer className='FooterContainer'>
+                  <h3 className='textFooter'>Footer</h3>
+                </footer>
+              </div>
+            </Form>
+          </div>
         )
       }}
     </Formik>
