@@ -3,7 +3,12 @@ import { Button } from '@material-ui/core'
 import logOutUserApi from '../api/logOutUserApi'
 import { GlobalContext } from '../auth/GlobalContext'
 import { useHistory } from 'react-router-dom'
-import { DataGrid } from '@material-ui/data-grid'
+import {
+  DataGrid,
+  GridColDef,
+  GridApi,
+  GridCellValue
+} from '@material-ui/data-grid'
 
 import '../styles/HomeScreenStyles.css'
 import getAllTaskApi from '../api/getAllTaskApi'
@@ -33,6 +38,34 @@ const columns = [
     headerName: 'Updated at',
     editable: false,
     width: 200
+  },
+  {
+    field: '',
+    headerName: 'Actions',
+    sortable: false,
+    width: 220,
+    disableClickEventBubbling: true,
+    renderCell: params => {
+      const onClick = () => {
+        const api = params.api
+        const fields = api
+          .getAllColumns()
+          .map(c => c.field)
+          .filter(c => c !== '__check__' && !!c)
+        const thisRow = {}
+
+        fields.forEach(f => {
+          console.log('====================================')
+          console.log((f = params.getValue(f)))
+          console.log('====================================')
+          // thisRow[f] = params.getValue(f)
+        })
+
+        // return alert(JSON.stringify(thisRow, null, 4))
+      }
+
+      return <Button onClick={onClick}>Click</Button>
+    }
   }
 ]
 
@@ -44,10 +77,8 @@ export const HomeScreen = () => {
   console.log(token)
   useEffect(() => {
     getAllTaskApi(token).then(res => setDataTable(res.data.data))
-    // getAllTaskApi().then((res) => setstate())
   }, [token])
 
-  console.log('====================================')
   const filterData = dataTable.map(res => {
     return {
       _id: res._id,
@@ -57,8 +88,7 @@ export const HomeScreen = () => {
       updatedAt: res.updatedAt
     }
   })
-  console.log(filterData)
-  console.log('====================================')
+
   const logOutSession = () => {
     logOutUserApi(token).then(res => {
       if (res.data.success) {
