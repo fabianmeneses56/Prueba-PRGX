@@ -7,6 +7,7 @@ import { AppSubmit } from '../form/AppSubmit'
 import { ValidationRegister } from '../form/validations/registerValidation'
 import registerUserApi from '../api/registerUserApi'
 import '../styles/LoginScreen.css'
+import { GoBackButtom } from '../components/GoBackButtom'
 
 const initialValues = {
   email: '',
@@ -43,6 +44,10 @@ export const RegisterScreen = () => {
         return (
           <Form>
             <div className='Container'>
+              <div clasName='backRegister'>
+                <GoBackButtom />
+              </div>
+
               <section className='sectionContainer'>
                 <AppFormInput label='Name' name='name' />
                 <AppFormInput label='Age' name='age' />

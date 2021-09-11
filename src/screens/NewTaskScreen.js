@@ -6,6 +6,7 @@ import { AppSubmit } from '../form/AppSubmit'
 import { addNewTaskValidation } from '../form/validations/addNewTaskValidation'
 import addNewTaskApi from '../api/addNewTaskApi'
 import { GlobalContext } from '../auth/GlobalContext'
+import { GoBackButtom } from '../components/GoBackButtom'
 
 const initialValues = {
   description: ''
@@ -32,7 +33,10 @@ export const NewTaskScreen = () => {
       {({ errors, touched, isSubmitting, setFieldValue }) => {
         return (
           <div className='generalContainer'>
-            <h3 className='textFooter'>New Task</h3>
+            <div>
+              <GoBackButtom />
+              <h3 className='textFooter'>New Task</h3>
+            </div>
             <Form>
               <div className='Container'>
                 <section className='sectionContainer'>

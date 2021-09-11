@@ -8,6 +8,7 @@ import { GlobalContext } from '../auth/GlobalContext'
 import GetUserApi from '../api/getProfile'
 import { updateProfileValidation } from '../form/validations/updateProfileValidation'
 import updateProfileApi from '../api/updateProfileApi'
+import { GoBackButtom } from '../components/GoBackButtom'
 
 const initialValues = {
   name: '',
@@ -33,7 +34,10 @@ export const ProfileSettingsScreen = () => {
   }
   return (
     <div className='generalContainer'>
-      <h3 className='textFooter'>Profile Settings</h3>
+      <div>
+        <GoBackButtom />
+        <h3 className='textFooter'>Profile Settings</h3>
+      </div>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
