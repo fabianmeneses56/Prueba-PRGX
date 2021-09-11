@@ -15,6 +15,7 @@ import { makeStyles } from '@material-ui/styles'
 import '../styles/HomeScreenStyles.css'
 import getAllTaskApi from '../api/getAllTaskApi'
 import deleteTaskApi from '../api/deleteTaskApi'
+import updateTaskApi from '../api/updateTaskApi'
 
 const defaultTheme = createTheme()
 const useStyles = makeStyles(
@@ -38,6 +39,13 @@ function RowMenuCell(props) {
   const classes = useStyles()
 
   const handleEditClick = event => {
+    updateTaskApi(token, id).then(res => {
+      if (res.data.success) {
+        return Swal.fire('success', 'task updated successfully', 'success')
+      } else {
+        return Swal.fire('Error', 'An error has occurred', 'error')
+      }
+    })
     event.stopPropagation()
     api.updateRows([{ id, _action: 'update' }])
   }
